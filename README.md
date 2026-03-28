@@ -39,8 +39,9 @@ The full report with detailed analysis is available in the [Assignment Document]
 
 Install the required Python packages:
 
-
+```bash
 pip install torch transformers datasets accelerate evaluate jiwer librosa soundfile pandas openpyxl tqdm huggingface_hub
+
 A GPU is highly recommended for training and evaluation.
 
 Question 1 – Fine‑tuning Whisper‑small
