@@ -7,7 +7,7 @@ This repository contains code, data, and results for the ASR assignment complete
 - **Spell checking** of ~177,500 unique Hindi words with confidence scoring.
 - **Lattice-based WER evaluation** for fairer ASR model comparison.
 
-The full report with detailed analysis is available in the [Assignment Document](https://docs.google.com/document/d/...). *(Replace with your actual link or remove if not public.)*
+The full report with detailed analysis is available in the [Assignment Document](https://docs.google.com/document/d/10VCxvDeZztrbFK9GHqCuYLUohGQtex0MSDgQFu4b4nI/edit?usp=sharing). *(Replace with your actual link or remove if not public.)*
 
 ## 📁 Repository Structure
 
@@ -69,3 +69,57 @@ python q2_pipeline.py
 - English word detection & tagging `[EN]...[/EN]`
 
 **Example transformations**:
+"तीन सौ चौवन लोग आए" → "354 लोग आए"
+"दो-चार बातें करनी थीं" → unchanged (idiom protected)
+"मेरा इंटरव्यू अच्छा गया" → "मेरा [EN]इंटरव्यू[/EN] अच्छा गया"
+
+
+**Output**: `q2_pipeline_results.xlsx`
+
+### Question 3 – Spell Checking Unique Words
+
+```bash
+python q3_spell_checker.py
+```
+
+**Input**: `Unique Words Data.xlsx` (177,509 unique words)
+
+**Results**:
+- **Correctly spelled**: 162,324 (91.4%)
+- **Incorrectly spelled**: 15,185 (8.6%)
+
+**Outputs**:
+- `q3_word_classifications.xlsx` – word + spelling status
+- `q3_full_results.xlsx` – confidence + reason
+- `q3_low_confidence_review.xlsx` – 50 words for manual review
+
+### Question 4 – Lattice-based WER Evaluation
+
+```bash
+python q4_lattice_wer.py
+```
+
+**Method**:
+- Builds lattice with reference variants + model consensus (≥3 models agree)
+- Computes standard WER vs. lattice WER
+
+**Sample Results** (`q4_results.xlsx`):
+
+| Model | Standard WER | Lattice WER | Improvement (Δ) | Unfairly Penalized |
+|-------|--------------|-------------|-----------------|-------------------|
+| Model H | 0.0331 | 0.0290 | 0.0041 | 4 |
+| Model i | 0.0061 | 0.0061 | 0.0000 | 0 |
+| Model k | 0.1060 | 0.0746 | 0.0314 | 17 |
+
+## 📝 Notes
+
+- Large files (`train.pkl`, `eval.pkl`, `whisper-small-hindi/`) excluded due to size limits.
+- `FT Data.xlsx` not included for privacy (expected in root for notebook).
+- All result files (Excel/CSV) are included for inspection.
+
+## 🔗 Links
+- [FLEURS Dataset](https://huggingface.co/datasets/google/fleurs)
+- [Whisper Model](https://huggingface.co/openai/whisper-small)
+
+---
+*Built with ❤️ for Josh Talks ASR Assignment*
